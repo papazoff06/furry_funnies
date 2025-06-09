@@ -37,6 +37,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'furry_funnies.author',
+    'furry_funnies.posts',
+    'furry_funnies.common'
 ]
 
 MIDDLEWARE = [
