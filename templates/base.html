@@ -1,4 +1,5 @@
 {% load static %}
+{% load get_profile %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,16 +21,17 @@
 
         <nav>
             <!-- If there is an author's profile -->
+            {% get_profile as author %}
             {% if author %}
             <div class="user">
-                <a href="#">Dashboard</a>
-                <a href="#">New Post</a>
-                <a href="#">Author's Profile</a>
+                <a href="{% url 'dashboard' %}">Dashboard</a>
+                <a href="{% url 'create-post' %}">New Post</a>
+                <a href="">Author's Profile</a>
             </div>
             {% else %}
             <!-- If author's profile has NOT been created -->
             <div class="guest">
-                <a href="#">Create Author's Profile</a>
+                <a href="{% url 'create-author' %}">Create Author's Profile</a>
             </div>
             {% endif %}
         </nav>
