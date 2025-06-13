@@ -16,3 +16,6 @@ class Post(models.Model):
     content = models.TextField()
     updated_at = models.DateTimeField(auto_now=True)
     author = models.ForeignKey(Author, on_delete=models.CASCADE, related_name='posts')
+
+    def str(self):
+        return self.title
