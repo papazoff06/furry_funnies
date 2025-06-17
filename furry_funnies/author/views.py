@@ -1,8 +1,8 @@
 from django.shortcuts import render
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, DetailView, TemplateView
+from django.views.generic import CreateView, DetailView, TemplateView, UpdateView, DeleteView
 
-from furry_funnies.author.forms import AuthorCreateForm
+from furry_funnies.author.forms import AuthorCreateForm, AuthorEditForm
 from furry_funnies.author.models import Author
 from furry_funnies.utils import get_author
 
@@ -30,5 +30,24 @@ class AuthorDetailView(TemplateView):
         author = get_author()
         last_update = author.posts.last().title
         context['author'] = author
-        context['last_update'] = last_update
+        if last_update:
+            context['last_update'] = last_update
         return context
+
+class AuthorEditView(UpdateView):
+    model = Author
+    form_class = AuthorEditForm
+    template_name = 'author/edit-author.html'
+    success_url = reverse_lazy('author-details')
+    author = get_author()
+
+    def get_object(self, queryset=None):
+        return self.author
+
+class AuthorDeleteView(DeleteView):
+    model = Author
+    template_name = 'author/delete-author.html'
+    success_url = reverse_lazy('home')
+    author = get_author()
+    def get_object(self, queryset=None):
+        return self.author

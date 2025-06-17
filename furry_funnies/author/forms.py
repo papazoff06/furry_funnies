@@ -20,4 +20,6 @@ class AuthorCreateForm(AuthorBaseForm):
         }
 
 class AuthorEditForm(AuthorBaseForm):
-    pass
+    class Meta:
+        model = Author
+        exclude = ['passcode',]
